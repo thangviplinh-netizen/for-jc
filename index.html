@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For JC 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffe6f0, #ffd6e0);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #ff4d6d;
+    }
+
+    .flags {
+      font-size: 2rem;
+      margin: 0 10px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #999;
+      color: white;
+      position: relative;
+    }
+
+    /* tim bay */
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>
+    <span class="flags">🇻🇳</span>
+    Will you be my lover JC? 💖
+    <span class="flags">🇵🇭</span>
+  </h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💘</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <script>
+    const noTexts = [
+      "No 😢",
+      "Let me think...",
+      "I don't know 😭",
+      "Maybe later...",
+      "Hmm...",
+      "Not sure...",
+      "Please stop 🥺",
+      "Still no 🙈",
+      "You sure? 😳",
+      "Okay... still no 😤"
+    ];
+
+    let noIndex = 0;
+    let yesScale = 1;
+
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    // tạo tim bay
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = "100%";
+      heart.style.fontSize = "20px";
+      heart.style.animation = "floatUp 3s linear";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }
+
+    setInterval(createHeart, 400);
+
+    noBtn.addEventListener("click", () => {
+      noIndex = (noIndex + 1) % noTexts.length;
+      noBtn.innerText = noTexts[noIndex];
+
+      // YES to dần
+      yesScale += 0.25;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      // nút NO chạy trốn
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <h1 style="font-size:3rem;color:#ff4d6d">
+          Yayyyy JC 💕 You said YES!!!
+        </h1>
+      `;
+    });
+  </script>
+
+</body>
+</html>
